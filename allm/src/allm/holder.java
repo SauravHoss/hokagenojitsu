@@ -77,6 +77,18 @@ public class holder
 				System.out.println("Time Taken: "+ time + " nanoseconds");
 				checker(test);
 	*/
+	
+				
+				//Quicksort Test
+				System.out.println("Original: "+Arrays.toString(test));
+				long start = System.nanoTime();
+				quickSortd(test, 0, test.length-1); 
+				long end = System.nanoTime();
+				long time = end - start;
+				System.out.println("Final : " +Arrays.toString(test));
+				System.out.println("Time Taken: "+ time + " nanoseconds");
+				checker(test);
+	
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//MERGE SORT
@@ -193,7 +205,7 @@ public class holder
 	        }
 		}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Quick Sort
+	//QUICKSORT
 		//Takes an array of integers and sorts them to be chronological 
 		public static void quickSort(int arr[], int low, int high)
 		 {
@@ -241,6 +253,58 @@ public class holder
 		    	 return front;
 		     }
 		 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//QUICKSORT (DANIEL)
+		public static void quickSortd(int[] list1, int front, int back)
+		{
+			if(front<back)
+			{
+				int pivotPos = partition(list1, front, back);
+				quickSort(list1, front, pivotPos-1);
+				quickSort(list1, pivotPos+1, back);
+			}
+		}
+
+		public static int partitiond(int[] a, int l, int r) 
+		{
+		    int tmp;
+		    int pivot = a[l];
+		    tmp = a[r];
+		    a[r] = a[l];
+		    a[l]=tmp;
+
+		    int wall=l;
+		    int pcount=1;
+		    for (int i=l;i<r;i++) 
+		    {
+		        if (a[i]<pivot) 
+		        {
+		            tmp = a[i];
+		            a[i]=a[wall];
+		            a[wall]=tmp;
+		            wall++;
+		        }
+		        if (a[i]==pivot)
+		            pcount++;
+		    }
+		    // now copy over all the pivots
+		    int rwall=wall;
+		    tmp = a[rwall];
+		    a[wall]=a[r];
+		    a[r]=tmp;
+		    rwall++;
+		    for (int i=rwall+1;i<=r;i++) 
+		    {
+		        if (a[i]==pivot) 
+		        {
+		            tmp = a[rwall];
+		            a[rwall]=a[i];
+		            a[i]=tmp;
+		            rwall++;
+		        }
+		    }
+		    return (wall+rwall)/2;
+		}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//HELPERS
 		//Swaps two items in an array of integers
