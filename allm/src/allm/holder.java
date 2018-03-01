@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class holder 
 {
-
 	public static void main(String[] args) 
 	{
 				//Testing Array Generator
@@ -15,7 +14,7 @@ public class holder
 				{
 					test[i] = rnd.nextInt(100000);
 				}
-				
+	/*			
 				//Mergesort Test
 				System.out.println("Original: "+Arrays.toString((test)));
 				long start = System.nanoTime();
@@ -23,13 +22,61 @@ public class holder
 				long end = System.nanoTime();
 				long time = end - start;
 				System.out.println("Time Taken: "+ time + " nanoseconds");			
+				System.out.print("Fully Sorted? ");
 				checker(mergeSort(test));
+	*/			
+	
+	/*
+				//Bubble Test
+				System.out.println("Original: "+Arrays.toString((test)));
+				long start = System.nanoTime();
+				bubble(test);
+				long end = System.nanoTime();
+				System.out.println("Final: " + Arrays.toString(test));
+				long time = end - start;
+				System.out.println("Time Taken: "+ time + " nanoseconds");			
+				System.out.print("Fully Sorted? ");
+				checker(test);
+	*/			
 				
+	/*			
+	 			//Selection Test
+				System.out.println("Original: "+Arrays.toString((test)));
+				long start = System.nanoTime();
+				select(test);
+				long end = System.nanoTime();
+				System.out.println("Final: " + Arrays.toString(test));
+				long time = end - start;
+				System.out.println("Time Taken: "+ time + " nanoseconds");			
+				System.out.print("Fully Sorted? ");
+				checker(test);
+	*/			
 				
+	/*			
+	 			//Insertion Test
+				System.out.println("Original: "+Arrays.toString((test)));
+				long start = System.nanoTime();
+				insert(test);
+				long end = System.nanoTime();
+				System.out.println("Final: " + Arrays.toString(test));
+				long time = end - start;
+				System.out.println("Time Taken: "+ time + " nanoseconds");			
+				System.out.print("Fully Sorted? ");
+				checker(test);
+	*/
+				
+				//Quicksort Test
+				long start = System.nanoTime();
+				System.out.println("Original: "+Arrays.toString(test));
+				holder.quickSort(test, 0, test.length-1); 
+				System.out.println("Final : " +Arrays.toString(test));
+				long end = System.nanoTime();
+				long time = end - start;
+				System.out.println("Time Taken: "+ time + " nanoseconds");
+				checker(test);
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//MERGE SORT
-	
 	//Case Sensitive Merge Sort (Caps go before lowercase)
 		public static int [] mergeSort(int [] list) 
 		{
@@ -88,10 +135,111 @@ public class holder
 			return full;
 		}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//BUBBLE SORT	
+		public static void bubble(int [] test) 
+		{
+			int counter = 5;
+			while(counter > 0) 		
+			{
+				counter = 0;
+				for(int j = 0; j < test.length-1; j++) 
+				{
+					if(test[j] > test[j+1])
+					{
+						swapperi(test, j, j+1);
+						counter++;
+					}
+				}
+			}	
+		}	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//SELECTION SORT
+		public static void select(int[] test) 
+		{
+			for(int i = 0; i < test.length-1; i++) 
+			{
+				double min = test[i];
+				int cf = i;
+					for(int j = i; j < test.length; j++) 
+					{
+						if(test[j] < min) 
+						{
+							min = test[j];
+							cf = j;
+						}
+					}
+					if(min < test[i]) 
+					{
+						swapperi(test, i, cf);
+					}
+			} 	
+		}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//INSERTION SORT
+		public static void insert(int [] test) 
+		{			
+	        for (int i = 1; i < test.length; i++) 
+	        {
+	            for(int j = i ; j > 0 ; j--)
+	            {
+	                if(test[j] < test[j-1])
+	                {
+	                   swapperi(test,j,(j-1));
+	                }
+	            }
+	        }
+		}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Quick Sort
+		//Takes an array of integers and sorts them to be chronological 
+		public static void quickSort(int arr[], int low, int high)
+		 {
+		     if (low < high)
+		     {
+		         int pi = partition(arr, low, high);
+		         
+		         quickSort(arr, low, pi-1);
+		         quickSort(arr, pi+1, high);
+		     }
+		 }
 		
+		public static int partition(int[] list, int front,int back) 
+		 {
+			 int low = front + 1;
+		     int pivot = list[front];
+
+		     while (back > low) 
+		     {
+		    	 while (low <= back && list[low] <= pivot) 
+		    	 {
+		    		 low++;
+		    	 }
+		         while (low <= back && list[back] > pivot) 
+		         {
+		        	 back--;
+		         }
+		         if (back > low) 
+		         {
+		        	 swapperi(list,back,low);
+		         }
+		     }
+
+		     while (back >= low && list[back] >= pivot)
+		     {
+		    	 back--;   
+		     }
+		     if (back > front)
+		     {
+		    	 swapperi(list,back,front);
+		    	 return back;
+		     } 
+		     else   
+		     {
+		    	 return front;
+		     }
+		 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//HELPERS
-		 
 		//Swaps two items in an array of integers
 		public static void swapperi(int [] arr, int x, int y) 
 		{
@@ -100,22 +248,7 @@ public class holder
 			arr[y] = holder;	
 		}
 		
-		//Swaps two items in an array of doubles
-		public static void swapperd(double [] arr, int x, int y) 
-		{
-			double holder = arr[x];
-			arr[x] = arr[y];
-			arr[y] = holder;	
-		}
-		
-		//Swaps two items in an array of Strings
-		public static void swappers(String[] test, int x, int y) 
-		{
-			String holder = test[x];
-			test[x] = test[y];
-			test[y] = holder;
-		}
-		
+		//Checks if array is sorted
 		public static void checker(int [] a) 
 		{
 			boolean poo = true;
@@ -127,9 +260,6 @@ public class holder
 					break;
 			    }
 			}
-			System.out.print(poo);
+			System.out.println(poo);
 		}
 }
-
-	
-
