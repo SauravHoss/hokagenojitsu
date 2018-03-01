@@ -18,9 +18,10 @@ public class holder
 				//Mergesort Test
 				System.out.println("Original: "+Arrays.toString((test)));
 				long start = System.nanoTime();
-				System.out.println("Final: "+Arrays.toString(mergeSort(test)));
+				mergeSort(test);
 				long end = System.nanoTime();
 				long time = end - start;
+				System.out.println("Final: "+Arrays.toString(mergeSort(test)));
 				System.out.println("Time Taken: "+ time + " nanoseconds");			
 				System.out.print("Fully Sorted? ");
 				checker(mergeSort(test));
@@ -32,8 +33,8 @@ public class holder
 				long start = System.nanoTime();
 				bubble(test);
 				long end = System.nanoTime();
-				System.out.println("Final: " + Arrays.toString(test));
 				long time = end - start;
+				System.out.println("Final: " + Arrays.toString(test));
 				System.out.println("Time Taken: "+ time + " nanoseconds");			
 				System.out.print("Fully Sorted? ");
 				checker(test);
@@ -45,8 +46,8 @@ public class holder
 				long start = System.nanoTime();
 				select(test);
 				long end = System.nanoTime();
-				System.out.println("Final: " + Arrays.toString(test));
 				long time = end - start;
+				System.out.println("Final: " + Arrays.toString(test));
 				System.out.println("Time Taken: "+ time + " nanoseconds");			
 				System.out.print("Fully Sorted? ");
 				checker(test);
@@ -58,22 +59,24 @@ public class holder
 				long start = System.nanoTime();
 				insert(test);
 				long end = System.nanoTime();
-				System.out.println("Final: " + Arrays.toString(test));
 				long time = end - start;
+				System.out.println("Final: " + Arrays.toString(test));
 				System.out.println("Time Taken: "+ time + " nanoseconds");			
 				System.out.print("Fully Sorted? ");
 				checker(test);
 	*/
 				
-				//Quicksort Test
-				long start = System.nanoTime();
+	/*
+	 			//Quicksort Test
 				System.out.println("Original: "+Arrays.toString(test));
+				long start = System.nanoTime();
 				holder.quickSort(test, 0, test.length-1); 
-				System.out.println("Final : " +Arrays.toString(test));
 				long end = System.nanoTime();
 				long time = end - start;
+				System.out.println("Final : " +Arrays.toString(test));
 				System.out.println("Time Taken: "+ time + " nanoseconds");
 				checker(test);
+	*/
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//MERGE SORT
