@@ -78,16 +78,30 @@ public class holder
 				checker(test);
 	*/
 	
-				
+	/*			
 				//Quicksort Test
 				System.out.println("Original: "+Arrays.toString(test));
 				long start = System.nanoTime();
-				quickSortd(test, 0, test.length-1); 
+				quickSortd(test, 0, test.length-1);
+				medf(test);
 				long end = System.nanoTime();
 				long time = end - start;
 				System.out.println("Final : " +Arrays.toString(test));
+				System.out.println("Median: "+medf(test));
 				System.out.println("Time Taken: "+ time + " nanoseconds");
 				checker(test);
+				System.out.println(mc(test));
+	*/			
+				
+				System.out.println("Original: "+Arrays.toString(test));
+				long start = System.nanoTime();
+				countingSortattempt(test, 100000);
+				long end = System.nanoTime();
+				long time = end - start;
+				System.out.println("Final : " +Arrays.toString(countingSortattempt(test, 100000)));
+				System.out.println("Time Taken: "+ time + " nanoseconds");
+				checker(test);
+				
 	
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -306,6 +320,38 @@ public class holder
 		    return (wall+rwall)/2;
 		}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//Counting Sort
+		public static int [] countingSortattempt(int [] arr, int full)
+		{
+			
+			int [] hope = new int [full + 1];
+			int [] please = new int [arr.length];
+			int x = 0;
+			
+			
+			for(int i = 0; i <= full; i++)
+			{
+				hope [i] = 0;
+			}
+			
+			for(int i = 0; i < arr.length; i++) 
+			{
+				hope[arr[i]]++;
+			}
+		
+			for(int i = 0; i <= full; i++) 
+			{
+				for(int j = 0; j < hope[i]; j++)
+				{
+					please[x++] = i;
+				}	
+			}
+			
+			return please;
+		}
+		
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//HELPERS
 		//Swaps two items in an array of integers
 		public static void swapperi(int [] arr, int x, int y) 
@@ -329,4 +375,27 @@ public class holder
 			}
 			System.out.println(poo);
 		}
+		
+		//median finder
+		public static int medf(int [] arr)
+		{
+			int ans;
+			if(arr.length%2==0)
+			{
+				ans = ((arr[(arr.length/2) - 1] + arr[(arr.length/2)])/2) ; 
+			}
+			else
+				ans = arr[(arr.length/2)];
+			return ans;
+		}
+		
+		//medianchecker
+		public static int mc(int [] arr)
+		{
+			
+			int a = ((arr[4999] + arr[5000])/2);
+			return a;
+		}
+		
+		
 }
